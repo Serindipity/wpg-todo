@@ -31,9 +31,9 @@ const TodoList = () => {
 
   const getTodos = async () => {
     // Firestore 쿼리를 만듭니다.
-    const q = query(todoCollection);
+    // const q = query(todoCollection);
     // const q = query(collection(db, "todos"), where("user", "==", user.uid));
-    // const q = query(todoCollection, orderBy("datetime", "desc"));
+    const q = query(todoCollection, orderBy("datetime", "asc"));
 
     // Firestore 에서 할 일 목록을 조회합니다.
     const results = await getDocs(q);
@@ -65,14 +65,20 @@ const TodoList = () => {
     // }
     // ...todos => {id: 1, text: "할일1", completed: false}, {id: 2, text: "할일2", completed: false}}, ..
 
+    const datetime = new Date().toISOString();
+
     // Firestore 에 추가한 할 일을 저장합니다.
     const docRef = await addDoc(todoCollection, {
       text: input,
       completed: false,
+      datetime: datetime,
     });
 
     // id 값을 Firestore 에 저장한 값으로 지정합니다.
-    setTodos([...todos, { id: docRef.id, text: input, completed: false }]);
+    setTodos([
+      ...todos,
+      { id: docRef.id, text: input, datetime: datetime, completed: false },
+    ]);
     setInput("");
   };
 
