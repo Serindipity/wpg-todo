@@ -24,6 +24,10 @@ const TodoItem = ({ todo, onToggle, onDelete }) => {
       </span>
 
       <span className={styles.todoDatetime}>
+        user-{todo.userId.substring(todo.userId.length-3)}
+      </span>
+
+      <span className={styles.todoDatetime}>
         {todo.datetime.substring(0, 10)}
       </span>
 

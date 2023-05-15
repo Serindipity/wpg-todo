@@ -40,10 +40,14 @@ const AdminTodoList = () => {
     // const q = query(collection(db, "todos"), where("user", "==", user.uid));
     // const q = query(todoCollection, orderBy("datetime", "asc"));
     if (!data?.user?.name) return;
-    if (data?.user?.id !== '2791429053') return;
+    // if (data?.user?.id !== '2791429053') return;
 
-    const q = query(
+    const q = data?.user?.id === '2791429053' ? query(
       todoCollection,
+      orderBy("datetime", "asc")
+    ) : query(
+      todoCollection,
+      where("userId", "==", data?.user?.id),
       orderBy("datetime", "asc")
     );
 
