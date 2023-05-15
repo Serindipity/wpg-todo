@@ -188,7 +188,7 @@ const AdminTodoList = () => {
             key={todo.id}
             todo={todo}
             onToggle={() => toggleTodo(todo.id)}
-            onDelete={() => deleteTodo(todo.id)}
+            onDelete={() => data?.user?.id === todo.userId ? deleteTodo(todo.id): alert('not your business')}
           />
         ))}
       </ul>
